@@ -1,0 +1,15 @@
+.banner-full{
+    background: center #222 url("/images/home_banner.jpg") fixed no-repeat;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    height: 100vh;
+}
+.navbar{
+    background: transparent !important;
+    color: white;
+}
+.navbar a {
+    color: white;
+}

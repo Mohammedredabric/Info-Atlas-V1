@@ -1,0 +1,76 @@
+created:
+    - database/migrations/2020_05_20_232835_create_categories_table.php
+    - database/migrations/2020_05_20_232836_create_amenities_table.php
+    - database/migrations/2020_05_20_232837_create_countries_table.php
+    - database/migrations/2020_05_20_232838_create_cities_table.php
+    - database/migrations/2020_05_20_232839_create_listings_table.php
+    - database/migrations/2020_05_20_232840_create_review_wise_qualities_table.php
+    - database/migrations/2020_05_20_232841_create_reviews_table.php
+    - database/migrations/2020_05_20_232842_create_frontend_settings_table.php
+    - database/migrations/2020_05_20_232843_create_backend_settings_table.php
+    - database/migrations/2020_05_20_232843_create_category_listing_table.php
+    - database/migrations/2020_05_20_232843_create_amenity_listing_table.php
+    - database/migrations/2020_05_20_232843_create_amenities_listing_table.php
+    - app/Models/Category.php
+    - app/Models/Amenity.php
+    - app/Models/Country.php
+    - app/Models/City.php
+    - app/Models/Listing.php
+    - app/Models/ReviewWiseQuality.php
+    - app/Models/Review.php
+    - app/Models/FrontendSettings.php
+    - app/Models/BackendSettings.php
+    - database/factories/CategoryFactory.php
+    - database/factories/AmenityFactory.php
+    - database/factories/CountryFactory.php
+    - database/factories/CityFactory.php
+    - database/factories/ListingFactory.php
+    - database/factories/ReviewWiseQualityFactory.php
+    - database/factories/ReviewFactory.php
+    - database/factories/FrontendSettingsFactory.php
+    - database/factories/BackendSettingsFactory.php
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/AmenitiesController.php
+    - app/Http/Controllers/CityController.php
+    - app/Http/Controllers/ListingController.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/CategoryUpdateRequest.php
+    - app/Http/Requests/AmenityStoreRequest.php
+    - app/Http/Requests/AmenityUpdateRequest.php
+    - app/Http/Requests/CityStoreRequest.php
+    - app/Http/Requests/CityUpdateRequest.php
+    - app/Http/Requests/ListingStoreRequest.php
+    - app/Http/Requests/ListingUpdateRequest.php
+    - resources/views/category/index.blade.php
+    - resources/views/category/create.blade.php
+    - resources/views/category/show.blade.php
+    - resources/views/category/edit.blade.php
+    - resources/views/amenity/index.blade.php
+    - resources/views/amenity/create.blade.php
+    - resources/views/amenity/show.blade.php
+    - resources/views/amenity/edit.blade.php
+    - resources/views/city/index.blade.php
+    - resources/views/city/create.blade.php
+    - resources/views/city/show.blade.php
+    - resources/views/city/edit.blade.php
+    - resources/views/listing/index.blade.php
+    - resources/views/listing/create.blade.php
+    - resources/views/listing/show.blade.php
+    - resources/views/listing/edit.blade.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/AmenitiesControllerTest.php
+    - tests/Feature/Http/Controllers/CityControllerTest.php
+    - tests/Feature/Http/Controllers/ListingControllerTest.php
+updated:
+    - routes/api.php
+models:
+    Category: { parebt: integer, icon_class: string, name: string, slug: 'string:400', thumbnail: string, relationships: { belongsToMany: Listing } }
+    Amenities: { icon_class: string, name: string, slug: 'string:400', relationships: { belongsToMany: Listing } }
+    Country: { name: string, code: string, dial_code: string, currency_name: string, currency_symbol: string, currency_code: string, slug: 'string:400', relationships: { hasMany: City } }
+    City: { name: string, slug: 'string:400', country_id: foreign, relationships: { belongsTo: Country } }
+    Listing: { code: string, name: string, description: text, photos: json, video_url: string, video_provider: string, tag: string, adress: string, email: string, phone: string, website: string, social: json, latitude: string, longitude: string, status: string, listing_type: string, listing_thumbnail: string, listing_cover: string, seo_meta_tags: string, user_id: foreign, relationships: { belongsTo: User, hasMany: Review, belongsToMany: 'Amenities, Category' } }
+    ReviewWiseQuality: { rating_from: float, rating_to: float, quality: string, relationships: { hasMany: Review } }
+    Review: { review_comment: string, reviewwisequality_id: foreign, listing_id: foreign, relationships: { belongsTo: 'listing,ReviewWiseQuality' } }
+    FrontendSettings: { type: string, description: 'string:400' }
+    BackendSettings: { type: string, description: 'string:400' }
+    Amenity: { icon_class: string, name: string, slug: 'string:400', relationships: { belongsToMany: Listing } }

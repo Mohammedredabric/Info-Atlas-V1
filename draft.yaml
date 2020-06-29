@@ -1,0 +1,85 @@
+models:
+  Category :
+    parebt: integer
+    icon_class: string
+    name: string
+    slug: string:400
+    thumbnail: string
+    relationships:
+      belongsToMany: Listing
+  Amenity:
+    icon_class: string
+    name: string
+    slug: string:400
+    relationships:
+      belongsToMany: Listing
+  Country:
+    name: string
+    code: string
+    dial_code: string
+    currency_name: string
+    currency_symbol: string
+    currency_code: string
+    slug: string:400
+    relationships:
+      hasMany: City
+  City:
+    name: string
+    slug: string:400
+    country_id:  foreign
+    relationships:
+      belongsTo: Country
+  Listing:
+    code: string
+    name: string
+    description: text
+    photos: json
+    video_url: string
+    video_provider: string
+    tag: string
+    adress: string
+    email: string
+    phone: string
+    website: string
+    social: json
+    latitude: string
+    longitude: string
+    status: string
+    listing_type: string
+    listing_thumbnail: string
+    listing_cover: string
+    seo_meta_tags: string
+    user_id:  foreign
+    relationships:
+      belongsTo: User
+      hasMany: Review
+      belongsToMany: Amenities, Category
+  ReviewWiseQuality:
+    rating_from: float
+    rating_to: float
+    quality: string
+    relationships:
+      hasMany: Review
+  Review:
+    review_comment: string
+    reviewwisequality_id:  foreign
+    listing_id:  foreign
+    relationships:
+      belongsTo: listing,ReviewWiseQuality
+  FrontendSettings:
+    type: string
+    description: string:400
+  BackendSettings:
+    type: string
+    description: string:400
+controllers:
+  Category:
+    resource: web
+  Amenities:
+    resource: web
+  City:
+    resource: web
+  Listing:
+    resource: web
+
+

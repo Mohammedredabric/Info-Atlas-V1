@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    protected $fillable =['title','sub_title','content', 'files','user_id'];
+
+    protected $hidden=['updated_at'];
+
+    public function user(){
+        return $this->belongsTo(\App\User::class);
+    }
+
+
+
+}
