@@ -10,7 +10,10 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Listing;
 use App\Models\TimeConfiguration;
+use App\Notifications\ListCreated;
+use App\Notifications\ListPublished;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class ListingController extends Controller
 {
@@ -54,6 +57,9 @@ class ListingController extends Controller
         $listing=Listing::find($id);
         $listing->status="Active";
         $listing->save();
+        // Notification
+
+        Notification::send($listing , new ListPublished($listing));
         return redirect()->route('listing.index')->with('listing', $listing->name. 'Listing has Achieved!');
     }
 
@@ -116,6 +122,10 @@ class ListingController extends Controller
         $timeConfiguration->save();
         //
         $request->session()->flash('listing', $listing->name);
+        // Notification
+
+        Notification::send($listing , new ListCreated($listing));
+
         return redirect()->route('listing.index');
     }
 
